@@ -1,170 +1,254 @@
+// src/pages/About.jsx
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { motion, useScroll, useTransform } from "framer-motion";
 
-// Swiper CSS
-import "swiper/css";
+// 🔹 Mock Swiper for auto-scrolling carousel
+const Swiper = ({ children, className, ...props }) => (
+  <div className={`flex overflow-hidden ${className}`} {...props}>
+    <motion.div
+      className="flex"
+      animate={{ x: [0, -2000] }}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+    >
+      {children}
+      {children} {/* Duplicate for seamless loop */}
+    </motion.div>
+  </div>
+);
 
-// Replace with your real images
-import img1 from "../assets/coffee-cherries_4.png";
-import img2 from "../assets/coffee-cherries_4.png";
-import img3 from "../assets/coffee-cherries_4.png";
-import img4 from "../assets/coffee-cherries_4.png";
-import img5 from "../assets/coffee-cherries_4.png";
-import img6 from "../assets/coffee-cherries_4.png";
-import img7 from "../assets/coffee-cherries_4.png";
-import img8 from "../assets/coffee-cherries_4.png";
+const SwiperSlide = ({ children, className }) => (
+  <div className={`flex-shrink-0 ${className}`}>{children}</div>
+);
 
-function AboutUs() {
-  const slides = [img1, img2, img3, img4, img5, img6, img7, img8];
+// 🔹 Sample images
+const slides = [
+  "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=500&h=350&fit=crop",
+  "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500&h=350&fit=crop",
+  "https://images.unsplash.com/photo-1516486392848-8b67ef89f113?w=500&h=350&fit=crop",
+  "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&h=350&fit=crop",
+];
+
+// 🔹 Animations
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+};
+
+function About() {
+  const { scrollYProgress } = useScroll();
+  const heroY = useTransform(scrollYProgress, [0, 0.3], [0, -50]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.7]);
 
   return (
-    <>
-      {/* ---------- Hero / Intro ---------- */}
-      <section className="py-20 bg-gradient-to-r from-[#5C2C0C] to-[#964304] text-white">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            About <span className="text-amber-300">BM Coffee</span>
-          </h1>
-          <blockquote className="text-lg md:text-xl italic leading-relaxed max-w-3xl mx-auto text-amber-100">
-            “Experience the finest collection of Ethiopian coffee beans, where
-            tradition meets excellence.”
-          </blockquote>
-        </div>
-      </section>
+    <div className="w-screen min-h-screen bg-white text-black overflow-x-hidden">
+      {/* ---------- Hero ---------- */}
+      <motion.section
+        className="relative py-32 overflow-hidden"
+        style={{ y: heroY, opacity: heroOpacity }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4E342E] via-[#6D4C41] to-[#8D6E63]" />
 
-      {/* ---------- Smooth Auto-scrolling Carousel ---------- */}
-      <section className="w-full bg-[#FAF6F0] py-12 overflow-hidden">
-        <div className="w-full mx-auto">
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={12} // small gap between slides
-            slidesPerView={4}
-            loop={true}
-            allowTouchMove={false}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
+        <motion.div
+          className="relative z-10 max-w-6xl mx-auto px-6 text-center text-white"
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+        >
+          <motion.h1
+            className="text-6xl md:text-8xl font-extrabold mb-8"
+            style={{
+              textShadow: "0 0 40px rgba(251, 146, 60, 0.5)",
+              background: "linear-gradient(45deg, #ffffff, #fb923c)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
             }}
-            speed={4000} // continuous smooth scroll
-            breakpoints={{
-              320: { slidesPerView: 1, spaceBetween: 8 },
-              640: { slidesPerView: 2, spaceBetween: 10 },
-              1024: { slidesPerView: 3, spaceBetween: 12 },
-              1280: { slidesPerView: 4, spaceBetween: 12 },
-            }}
-            className="w-full"
           >
-            {slides.map((image, idx) => (
-              <SwiperSlide key={idx} className="flex justify-center">
-                <div className="bg-white rounded-lg shadow-md overflow-hidden w-full">
-                  <img
-                    src={image}
-                    alt={`Slide ${idx + 1}`}
-                    className="w-full h-56 object-cover"
-                  />
-                  <div className="p-3">
-                    <h3 className="font-bold text-base text-[#5C2C0C]">
-                      Coffee Story {idx + 1}
-                    </h3>
-                    <p className="text-gray-600 text-sm">
-                      A short caption describing this image or process.
-                    </p>
-                  </div>
+            About <span className="text-orange-400">BM Coffee</span>
+          </motion.h1>
+          <motion.p
+            className="text-xl md:text-3xl italic text-amber-100 max-w-4xl mx-auto"
+          >
+            “Experience the finest Ethiopian coffee beans — where tradition meets
+            excellence.”
+          </motion.p>
+        </motion.div>
+      </motion.section>
+
+      {/* ---------- Journey Carousel ---------- */}
+      <section className="w-screen bg-gradient-to-r from-[#FAF6F0] to-[#F5F1EB] py-20">
+        <motion.div
+          className="max-w-6xl mx-auto px-6 text-center mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-[#5C2C0C] mb-4">
+            Our Coffee Journey
+          </h2>
+          <p className="text-lg text-gray-600">
+            From bean to cup — witness the craft behind every blend.
+          </p>
+        </motion.div>
+
+        <Swiper className="w-full">
+          {slides.map((image, idx) => (
+            <SwiperSlide key={idx} className="px-3" style={{ width: "350px" }}>
+              <motion.div
+                className="bg-white rounded-2xl shadow-xl overflow-hidden"
+                whileHover={{ scale: 1.05, y: -10 }}
+                transition={{ duration: 0.5 }}
+              >
+                <img
+                  src={image}
+                  alt={`Step ${idx + 1}`}
+                  className="w-full h-64 object-cover transition-transform duration-700 hover:scale-110"
+                />
+                <div className="p-6">
+                  <h3 className="font-bold text-xl text-[#5C2C0C] mb-2">
+                    Step {idx + 1}
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    Discover the meticulous process behind our premium beans.
+                  </p>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
-
-      {/* ---------- Who We Are ---------- */}
-      <section className="py-20 bg-white text-black">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <img
-              src={img4}
-              alt="Farmers"
-              className="rounded-lg shadow-lg object-cover w-full"
-            />
-          </div>
-
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#5C2C0C]">
-              Who We Are
-            </h2>
-            <p className="text-lg mb-6 text-gray-700 leading-relaxed">
-              BM Coffee Export is dedicated to bringing the world the finest
-              Ethiopian coffee beans. With decades of experience, we work
-              directly with farmers to ensure authenticity, quality, and
-              sustainability in every bean we export.
-            </p>
-            <p className="text-lg mb-6 text-gray-700 leading-relaxed">
-              We take pride in preserving Ethiopia's coffee heritage while
-              innovating for the future. Our beans are carefully sourced,
-              processed, and delivered to guarantee a unique taste that
-              represents the heart of Ethiopian culture.
-            </p>
-
-            <div className="grid grid-cols-3 gap-6 text-center mt-6">
-              <div>
-                <div className="text-3xl font-bold text-[#D46605]">25+</div>
-                <div className="text-gray-600">Years Experience</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-[#D46605]">500+</div>
-                <div className="text-gray-600">Partner Farmers</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-[#D46605]">50+</div>
-                <div className="text-gray-600">Countries Served</div>
-              </div>
-            </div>
-          </div>
-        </div>
+              </motion.div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
 
       {/* ---------- Mission / Vision / Values ---------- */}
-      <section className="py-20 bg-gradient-to-r from-[#773503] to-[#5C2C0C]">
-        <div className="max-w-6xl mx-auto px-6 text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Our Mission, Vision & Values
-          </h2>
-          <p className="text-lg text-amber-100">
-            The principles that guide every decision and every bean we export.
-          </p>
-        </div>
+      <section className="py-24 bg-gradient-to-b from-[#3E2723] via-[#4E342E] to-[#5C2C0C] text-white relative">
+        <div className="max-w-6xl mx-auto px-6">
+          <motion.h2
+            className="text-5xl font-extrabold mb-16 text-center text-orange-300"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            Mission, Vision & Values
+          </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-bold text-[#5C2C0C] mb-4">Mission</h3>
-            <p className="text-gray-700">
-              To share the authentic taste of Ethiopian coffee with the world
-              while supporting farmers through fair trade and sustainable
-              practices.
-            </p>
-          </div>
+          <div className="space-y-16">
+            {/* Mission */}
+            <motion.div
+              className="flex flex-col md:flex-row items-center gap-10"
+              initial={{ opacity: 0, x: -80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <div className="md:w-1/3 text-6xl">🎯</div>
+              <div className="md:w-2/3">
+                <h3 className="text-3xl font-bold mb-4 text-orange-200">
+                  Our Mission
+                </h3>
+                <p className="text-lg leading-relaxed text-amber-100">
+                  We aim to share the authentic taste of Ethiopian coffee with
+                  the world. Every bean we export not only tells a story of
+                  heritage and craftsmanship but also empowers local farmers by
+                  providing fair trade, sustainable opportunities, and global
+                  recognition for their hard work.
+                </p>
+              </div>
+            </motion.div>
 
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-bold text-[#5C2C0C] mb-4">Vision</h3>
-            <p className="text-gray-700">
-              To become a global leader in premium coffee exports,
-              representing Ethiopia's legacy of quality and excellence.
-            </p>
-          </div>
+            {/* Vision */}
+            <motion.div
+              className="flex flex-col md:flex-row-reverse items-center gap-10"
+              initial={{ opacity: 0, x: 80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <div className="md:w-1/3 text-6xl">🌍</div>
+              <div className="md:w-2/3">
+                <h3 className="text-3xl font-bold mb-4 text-orange-200">
+                  Our Vision
+                </h3>
+                <p className="text-lg leading-relaxed text-amber-100">
+                  To lead as a global ambassador of Ethiopian coffee while
+                  preserving the culture, traditions, and values tied to our
+                  beans. Our vision is a world where every sip of coffee
+                  connects people back to the rich soil of Ethiopia.
+                </p>
+              </div>
+            </motion.div>
 
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-bold text-[#5C2C0C] mb-4">Values</h3>
-            <p className="text-gray-700">
-              Integrity, sustainability, and innovation guide every step of our
-              journey, ensuring that every cup tells a story of heritage and
-              passion.
-            </p>
+            {/* Values */}
+            <motion.div
+              className="flex flex-col md:flex-row items-center gap-10"
+              initial={{ opacity: 0, x: -80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <div className="md:w-1/3 text-6xl">✨</div>
+              <div className="md:w-2/3">
+                <h3 className="text-3xl font-bold mb-4 text-orange-200">
+                  Our Values
+                </h3>
+                <p className="text-lg leading-relaxed text-amber-100">
+                  Integrity, sustainability, and innovation guide every step we
+                  take. From eco-friendly farming practices to introducing
+                  cutting-edge roasting methods, we remain committed to
+                  protecting both our environment and our customers’ trust.
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
-    </>
+
+      {/* ---------- Founders Section ---------- */}
+      <section className="py-24 bg-[#FAF6F0]">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <motion.h2
+            className="text-5xl font-extrabold mb-16 text-[#5C2C0C]"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            Meet Our Founders
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {[
+              {
+                name: "Abebe Mekonnen",
+                role: "Co-Founder & CEO",
+                img: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?w=400&h=400&fit=crop",
+                bio: "Abebe has spent over 20 years building bridges between Ethiopian farmers and the global coffee market. His leadership ensures BM Coffee remains true to its roots while innovating for the future.",
+              },
+              {
+                name: "Marta Bekele",
+                role: "Co-Founder & Head of Operations",
+                img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop",
+                bio: "Marta oversees sourcing and operations, guaranteeing each bean is harvested, roasted, and exported with the highest standards. She is passionate about empowering women farmers in Ethiopia.",
+              },
+            ].map((founder, i) => (
+              <motion.div
+                key={i}
+                className="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transition"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: i * 0.3 }}
+              >
+                <img
+                  src={founder.img}
+                  alt={founder.name}
+                  className="w-40 h-40 rounded-full mx-auto mb-6 object-cover shadow-lg"
+                />
+                <h3 className="text-2xl font-bold text-[#5C2C0C]">
+                  {founder.name}
+                </h3>
+                <p className="italic text-orange-600 mb-4">{founder.role}</p>
+                <p className="text-gray-700">{founder.bio}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 
-export default AboutUs;
+export default About;
