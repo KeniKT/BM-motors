@@ -1,22 +1,36 @@
-// src/pages/Contact.jsx
 import React, { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Clock, CheckCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Clock, CheckCircle, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
-// Animation variants matching About page
+// Animation variants matching other pages
 const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+};
+
+const fadeInLeft = {
+  hidden: { opacity: 0, x: -80 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
+};
+
+const fadeInRight = {
+  hidden: { opacity: 0, x: 80 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
 };
 
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-const stagger = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.3, delayChildren: 0.3 } },
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
+};
+
+const imageReveal = {
+  hidden: { opacity: 0, scale: 1.1 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] } },
 };
 
 function Contact() {
@@ -35,6 +49,13 @@ function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const socialLinks = [
+    { icon: Facebook, href: "https://facebook.com", color: "hover:text-blue-500", name: "Facebook" },
+    { icon: Twitter, href: "https://twitter.com", color: "hover:text-sky-400", name: "Twitter" },
+    { icon: Instagram, href: "https://instagram.com", color: "hover:text-pink-500", name: "Instagram" },
+    { icon: Linkedin, href: "https://linkedin.com", color: "hover:text-blue-700", name: "LinkedIn" }
+  ];
+
   return (
     <div className="w-screen min-h-screen bg-white text-black overflow-x-hidden">
       {/* ---------- Hero ---------- */}
@@ -42,35 +63,38 @@ function Contact() {
         className="relative py-32 overflow-hidden"
         style={{ y: heroY, opacity: heroOpacity }}
       >
-        {/* Background Gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#4E342E] via-[#6D4C41] to-[#8D6E63]" />
-
-        {/* Floating Coffee Glow Elements */}
+        
+        {/* Floating Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          {[...Array(15)].map((_, i) => (
+          {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute rounded-full bg-amber-300/10 blur-xl"
               style={{
-                width: `${Math.random() * 120 + 40}px`,
-                height: `${Math.random() * 120 + 40}px`,
+                width: `${Math.random() * 150 + 50}px`,
+                height: `${Math.random() * 150 + 50}px`,
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                y: [0, Math.random() * 50 - 25, 0],
-                x: [0, Math.random() * 50 - 25, 0],
-                opacity: [0.2, 0.6, 0.2],
+                y: [0, Math.random() * 60 - 30, 0],
+                x: [0, Math.random() * 60 - 30, 0],
+                opacity: [0.2, 0.5, 0.2],
+                scale: [1, 1.2, 1],
               }}
-              transition={{ duration: Math.random() * 12 + 8, repeat: Infinity }}
+              transition={{ 
+                duration: Math.random() * 15 + 10, 
+                repeat: Infinity,
+                ease: "easeInOut" 
+              }}
             />
           ))}
         </div>
 
-        {/* Content */}
         <motion.div
           className="relative z-10 max-w-6xl mx-auto px-6 text-center text-white"
-          variants={stagger}
+          variants={staggerContainer}
           initial="hidden"
           animate="visible"
         >
@@ -90,144 +114,162 @@ function Contact() {
             className="text-xl md:text-3xl italic text-amber-100 max-w-4xl mx-auto"
             variants={fadeInUp}
           >
-            "Have questions or want to connect? We'd love to hear from you."
+            Connect with us and discover the perfect coffee partnership.
           </motion.p>
-          <motion.div
-            className="w-32 h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto mt-8"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.5, delay: 1 }}
-          />
+          <motion.div className="w-24 h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto mt-8" />
         </motion.div>
       </motion.section>
 
       {/* ---------- Contact Info + Form Section ---------- */}
-      <section className="w-screen bg-gradient-to-r from-[#FAF6F0] to-[#F5F1EB] py-20">
+      <section className="py-20 bg-gradient-to-r from-[#FAF6F0] to-[#F5F1EB]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 md:gap-28">
             
-            {/* Contact Info */}
+            {/* Contact Info - Left Side */}
             <motion.div
-              className="relative"
+              className="flex flex-col justify-center"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
+              viewport={{ once: true, amount: 0.5 }}
+              variants={staggerContainer}
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-[#5C2C0C] mb-12">
+              <motion.h2 
+                className="text-4xl md:text-5xl font-extrabold text-[#5C2C0C] mb-8"
+                variants={fadeInLeft}
+              >
                 Get in Touch
-              </h2>
+              </motion.h2>
               
+              <motion.p
+                className="text-lg text-gray-600 leading-relaxed"
+                variants={fadeInLeft}
+              >
+                Ready to explore premium Ethiopian coffee? Whether you're looking to place an order, learn about our sourcing process, or discuss partnership opportunities, we're here to help. Our team is passionate about connecting you with the finest coffee Ethiopia has to offer.
+              </motion.p>
+
+              {/* Social Media Icons next to intro */}
+              <div className="flex items-center space-x-6 mt-6">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`transition ${social.color}`}
+                  >
+                    <social.icon size={24} />
+                  </a>
+                ))}
+              </div>
+
               {/* Contact Items */}
-              <div className="space-y-8">
-                {[
-                  { icon: Mail, text: "info@bmcoffee.com", label: "Email" },
-                  { icon: Phone, text: "+251 900 000 000", label: "Phone" },
-                  { icon: MapPin, text: "Addis Ababa, Ethiopia", label: "Location" }
+              <div className="space-y-8 mt-12">
+                {[ 
+                  { icon: Mail, text: "info@bmcoffee.com", label: "Email Us", description: "For inquiries and orders" },
+                  { icon: Phone, text: "+251 900 000 000", label: "Call Us", description: "Monday - Friday, 9 AM - 6 PM" },
+                  { icon: MapPin, text: "Addis Ababa, Ethiopia", label: "Visit Us", description: "Coffee capital headquarters" }
                 ].map((item, index) => (
                   <motion.div
                     key={index}
-                    className="flex items-center space-x-6 group"
-                    whileHover={{ x: 10, scale: 1.02 }}
+                    className="group relative"
+                    variants={fadeInUp}
+                    whileHover={{ x: 10 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="w-16 h-16 bg-gradient-to-r from-[#5C2C0C] to-[#4E342E] rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                      <item.icon className="w-8 h-8 text-amber-300" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500 uppercase tracking-wider font-semibold">
-                        {item.label}
-                      </p>
-                      <p className="text-xl font-semibold text-[#5C2C0C]">
-                        {item.text}
-                      </p>
+                    <div className="flex items-start space-x-6">
+                      <motion.div 
+                        className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300"
+                        whileHover={{ rotate: 5, scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <item.icon className="w-8 h-8 text-white" />
+                      </motion.div>
+                      <div className="flex-1">
+                        <p className="text-sm text-orange-600 uppercase tracking-wider font-bold mb-1">
+                          {item.label}
+                        </p>
+                        <p className="text-xl font-bold text-[#5C2C0C] mb-2">
+                          {item.text}
+                        </p>
+                        <p className="text-gray-600 text-sm">
+                          {item.description}
+                        </p>
+                      </div>
                     </div>
                   </motion.div>
                 ))}
               </div>
-
-              {/* Business Hours */}
-              <motion.div 
-                className="mt-16"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-              >
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
-                    <Clock className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-[#5C2C0C]">
-                    Business Hours
-                  </h3>
-                </div>
-                <div className="space-y-2 ml-20">
-                  <p className="text-lg text-gray-700"><span className="font-semibold">Mon – Fri:</span> 9:00 AM – 6:00 PM</p>
-                  <p className="text-lg text-gray-700"><span className="font-semibold">Sat:</span> 10:00 AM – 3:00 PM</p>
-                  <p className="text-lg text-gray-700"><span className="font-semibold">Sun:</span> Closed</p>
-                </div>
-              </motion.div>
             </motion.div>
 
-            {/* Contact Form */}
+            {/* Contact Form - Right Side */}
             <motion.div
-              className="relative"
+              className="w-full"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
+              viewport={{ once: true, amount: 0.5 }}
+              variants={imageReveal}
             >
               <motion.div 
-                className="bg-white shadow-2xl rounded-2xl p-10 border-t-4 border-[#5C2C0C]"
-                whileHover={{ scale: 1.02, y: -5 }}
+                className="bg-white shadow-2xl rounded-3xl p-10 border-t-4 border-[#5C2C0C] relative overflow-hidden group"
+                whileHover={{ y: -10, scale: 1.02 }}
                 transition={{ duration: 0.5 }}
               >
-                <h2 className="text-3xl font-bold text-[#5C2C0C] mb-8">
+                <motion.h2 
+                  className="text-3xl md:text-4xl font-extrabold text-[#5C2C0C] mb-8"
+                  variants={fadeInRight}
+                >
                   Send us a Message
-                </h2>
+                </motion.h2>
                 
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-gray-700 mb-2 font-semibold">Name</label>
+                <motion.p 
+                  className="text-gray-600 mb-8 leading-relaxed"
+                  variants={fadeInRight}
+                >
+                  Share your coffee requirements, ask questions about our sourcing process, or discuss potential partnerships. We'll get back to you within 24 hours.
+                </motion.p>
+                
+                <motion.div className="space-y-6" variants={staggerContainer}>
+                  <motion.div variants={fadeInUp}>
+                    <label className="block text-gray-700 mb-3 font-bold text-sm uppercase tracking-wider">Full Name</label>
                     <input
                       type="text"
                       name="name"
-                      placeholder="Your Full Name"
+                      placeholder="Enter your full name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5C2C0C] focus:border-transparent transition-all duration-300"
+                      className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-lg"
                     />
-                  </div>
+                  </motion.div>
                   
-                  <div>
-                    <label className="block text-gray-700 mb-2 font-semibold">Email</label>
+                  <motion.div variants={fadeInUp}>
+                    <label className="block text-gray-700 mb-3 font-bold text-sm uppercase tracking-wider">Email Address</label>
                     <input
                       type="email"
                       name="email"
-                      placeholder="your.email@example.com"
+                      placeholder="BMcoffee@gmail.com"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5C2C0C] focus:border-transparent transition-all duration-300"
+                      className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-lg"
                     />
-                  </div>
+                  </motion.div>
                   
-                  <div>
-                    <label className="block text-gray-700 mb-2 font-semibold">Message</label>
+                  <motion.div variants={fadeInUp}>
+                    <label className="block text-gray-700 mb-3 font-bold text-sm uppercase tracking-wider">Message</label>
                     <textarea
-                      rows="5"
+                      rows="6"
                       name="message"
-                      placeholder="Tell us about your coffee needs or questions..."
+                      placeholder="Tell us about your coffee needs, volume requirements, or any questions about our Ethiopian coffee..."
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5C2C0C] focus:border-transparent transition-all duration-300 resize-none"
+                      className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 resize-none text-lg"
                     ></textarea>
-                  </div>
+                  </motion.div>
                   
                   <motion.button
                     type="button"
                     onClick={handleSubmit}
-                    className="group relative w-full bg-gradient-to-r from-[#5C2C0C] to-[#4E342E] text-white py-4 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                    className="group relative w-full bg-gradient-to-r from-[#5C2C0C] to-[#4E342E] text-white py-5 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                    variants={fadeInUp}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -235,59 +277,21 @@ function Contact() {
                     <span className="relative z-10 flex items-center justify-center">
                       {isSubmitted ? (
                         <>
-                          <CheckCircle className="w-5 h-5 mr-2" />
-                          Message Sent!
+                          <CheckCircle className="w-6 h-6 mr-3" />
+                          Message Sent Successfully!
                         </>
                       ) : (
                         <>
-                          <Send className="w-5 h-5 mr-2" />
+                          <Send className="w-6 h-6 mr-3" />
                           Send Message
                         </>
                       )}
                     </span>
                   </motion.button>
-                </div>
+                </motion.div>
               </motion.div>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* ---------- Map Section ---------- */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#5C2C0C] via-[#4E342E] to-[#3E2723]" />
-
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center text-white">
-          <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-12"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            Visit Our Location
-          </motion.h2>
-          
-          <motion.div
-            className="bg-white/10 backdrop-blur-md p-12 rounded-3xl shadow-lg"
-            variants={scaleIn}
-            initial="hidden"
-            whileInView="visible"
-            whileHover={{ y: -10, scale: 1.02 }}
-            viewport={{ once: true }}
-          >
-            <MapPin className="w-16 h-16 text-amber-300 mx-auto mb-6" />
-            <h3 className="text-3xl font-bold mb-4 text-orange-300">
-              BM Coffee Headquarters
-            </h3>
-            <p className="text-amber-100 text-xl mb-6">
-              Located in the heart of Ethiopia's coffee capital
-            </p>
-            <div className="text-lg text-amber-100">
-              <p className="mb-2">📍 Addis Ababa, Ethiopia</p>
-              <p className="mb-2">🕒 Mon-Fri: 9:00 AM - 6:00 PM</p>
-              <p>📞 +251 900 000 000</p>
-            </div>
-          </motion.div>
         </div>
       </section>
     </div>
