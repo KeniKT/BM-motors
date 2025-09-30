@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Clock, CheckCircle, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
-// Animation variants matching other pages
 const fadeInUp = {
   hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
@@ -13,24 +12,9 @@ const fadeInLeft = {
   visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
 };
 
-const fadeInRight = {
-  hidden: { opacity: 0, x: 80 },
-  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
 const staggerContainer = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
-};
-
-const imageReveal = {
-  hidden: { opacity: 0, scale: 1.1 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] } },
 };
 
 function Contact() {
@@ -42,7 +26,10 @@ function Contact() {
 
   const handleSubmit = () => {
     setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({ name: '', email: '', message: '' });
+    }, 3000);
   };
 
   const handleInputChange = (e) => {
@@ -50,22 +37,27 @@ function Contact() {
   };
 
   const socialLinks = [
-    { icon: Facebook, href: "https://facebook.com", color: "hover:text-blue-500", name: "Facebook" },
-    { icon: Twitter, href: "https://twitter.com", color: "hover:text-sky-400", name: "Twitter" },
-    { icon: Instagram, href: "https://instagram.com", color: "hover:text-pink-500", name: "Instagram" },
-    { icon: Linkedin, href: "https://linkedin.com", color: "hover:text-blue-700", name: "LinkedIn" }
+    { icon: Facebook, href: "https://facebook.com", color: "hover:bg-blue-500" },
+    { icon: Twitter, href: "https://twitter.com", color: "hover:bg-sky-400" },
+    { icon: Instagram, href: "https://instagram.com", color: "hover:bg-pink-500" },
+    { icon: Linkedin, href: "https://linkedin.com", color: "hover:bg-blue-700" }
+  ];
+
+  const contactInfo = [
+    { icon: Mail, text: "BMcoffee@gmail.com", label: "Email Us", description: "For inquiries and orders" },
+    { icon: Phone, text: "+251 900 000 000", label: "Call Us", description: "Monday - Friday, 9 AM - 6 PM" },
+    { icon: MapPin, text: "Addis Ababa, Ethiopia", label: "Visit Us", description: "Coffee capital headquarters" }
   ];
 
   return (
     <div className="w-screen min-h-screen bg-white text-black overflow-x-hidden">
-      {/* ---------- Hero ---------- */}
+      {/* Hero */}
       <motion.section
         className="relative py-32 overflow-hidden"
         style={{ y: heroY, opacity: heroOpacity }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-[#4E342E] via-[#6D4C41] to-[#8D6E63]" />
         
-        {/* Floating Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => (
             <motion.div
@@ -116,179 +108,284 @@ function Contact() {
           >
             Connect with us and discover the perfect coffee partnership.
           </motion.p>
-          <motion.div className="w-24 h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto mt-8" />
         </motion.div>
       </motion.section>
 
-      {/* ---------- Contact Info + Form Section ---------- */}
+      {/* Contact Section */}
       <section className="py-20 bg-gradient-to-r from-[#FAF6F0] to-[#F5F1EB]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 md:gap-28">
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-start gap-12 md:gap-20">
             
             {/* Contact Info - Left Side */}
             <motion.div
               className="flex flex-col justify-center"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
+              viewport={{ once: true, amount: 0.3 }}
               variants={staggerContainer}
             >
               <motion.h2 
-                className="text-4xl md:text-5xl font-extrabold text-[#5C2C0C] mb-8"
+                className="text-4xl md:text-5xl font-extrabold text-[#5C2C0C] mb-6"
                 variants={fadeInLeft}
               >
                 Get in Touch
               </motion.h2>
               
               <motion.p
-                className="text-lg text-gray-600 leading-relaxed"
+                className="text-lg text-gray-600 leading-relaxed mb-8"
                 variants={fadeInLeft}
               >
-                Ready to explore premium Ethiopian coffee? Whether you're looking to place an order, learn about our sourcing process, or discuss partnership opportunities, we're here to help. Our team is passionate about connecting you with the finest coffee Ethiopia has to offer.
+                Ready to explore premium Ethiopian coffee? Whether you're looking to place an order, learn about our sourcing process, or discuss partnership opportunities, we're here to help.
               </motion.p>
 
-              {/* Social Media Icons next to intro */}
-              <div className="flex items-center space-x-6 mt-6">
+              {/* Social Media Icons */}
+              <motion.div 
+                className="flex items-center gap-3 mb-12"
+                variants={fadeInLeft}
+              >
                 {socialLinks.map((social, index) => (
-                  <a
+                  <motion.a
                     key={index}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`transition ${social.color}`}
+                    className={`w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-md hover:shadow-xl transition-all text-gray-700 hover:text-white ${social.color}`}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5 + index * 0.1 }}
                   >
-                    <social.icon size={24} />
-                  </a>
+                    <social.icon size={20} />
+                  </motion.a>
                 ))}
-              </div>
+              </motion.div>
 
-              {/* Contact Items */}
-              <div className="space-y-8 mt-12">
-                {[ 
-                  { icon: Mail, text: "info@bmcoffee.com", label: "Email Us", description: "For inquiries and orders" },
-                  { icon: Phone, text: "+251 900 000 000", label: "Call Us", description: "Monday - Friday, 9 AM - 6 PM" },
-                  { icon: MapPin, text: "Addis Ababa, Ethiopia", label: "Visit Us", description: "Coffee capital headquarters" }
-                ].map((item, index) => (
+              {/* Contact Items - Enhanced */}
+              <div className="space-y-5">
+                {contactInfo.map((item, index) => (
                   <motion.div
                     key={index}
                     className="group relative"
-                    variants={fadeInUp}
-                    whileHover={{ x: 10 }}
-                    transition={{ duration: 0.3 }}
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 * index, duration: 0.6 }}
                   >
-                    <div className="flex items-start space-x-6">
+                    <motion.div
+                      className="flex items-start gap-4 p-5 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all relative overflow-hidden"
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Hover gradient overlay */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-orange-50 to-amber-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        initial={false}
+                      />
+                      
                       <motion.div 
-                        className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300"
-                        whileHover={{ rotate: 5, scale: 1.1 }}
-                        transition={{ duration: 0.3 }}
+                        className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg relative z-10"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
                       >
-                        <item.icon className="w-8 h-8 text-white" />
+                        <item.icon className="w-7 h-7 text-white" />
                       </motion.div>
-                      <div className="flex-1">
-                        <p className="text-sm text-orange-600 uppercase tracking-wider font-bold mb-1">
+                      
+                      <div className="relative z-10">
+                        <p className="text-xs text-orange-600 font-bold uppercase tracking-wider mb-1">
                           {item.label}
                         </p>
-                        <p className="text-xl font-bold text-[#5C2C0C] mb-2">
+                        <p className="text-lg font-bold text-[#5C2C0C] mb-1">
                           {item.text}
                         </p>
                         <p className="text-gray-600 text-sm">
                           {item.description}
                         </p>
                       </div>
-                    </div>
+
+                      {/* Decorative element */}
+                      <motion.div
+                        className="absolute top-2 right-2 w-2 h-2 bg-orange-400 rounded-full opacity-0 group-hover:opacity-100"
+                        animate={{ scale: [1, 1.5, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      />
+                    </motion.div>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
 
-            {/* Contact Form - Right Side */}
+            {/* Contact Form - Brown Box */}
             <motion.div
               className="w-full"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              variants={imageReveal}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
               <motion.div 
-                className="bg-white shadow-2xl rounded-3xl p-10 border-t-4 border-[#5C2C0C] relative overflow-hidden group"
-                whileHover={{ y: -10, scale: 1.02 }}
-                transition={{ duration: 0.5 }}
+                className="bg-gradient-to-br from-[#5C2C0C] via-[#4E342E] to-[#5C2C0C] shadow-2xl rounded-3xl p-8 md:p-10 relative overflow-hidden"
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3 }}
               >
-                <motion.h2 
-                  className="text-3xl md:text-4xl font-extrabold text-[#5C2C0C] mb-8"
-                  variants={fadeInRight}
-                >
-                  Send us a Message
-                </motion.h2>
-                
-                <motion.p 
-                  className="text-gray-600 mb-8 leading-relaxed"
-                  variants={fadeInRight}
-                >
-                  Share your coffee requirements, ask questions about our sourcing process, or discuss potential partnerships. We'll get back to you within 24 hours.
-                </motion.p>
-                
-                <motion.div className="space-y-6" variants={staggerContainer}>
-                  <motion.div variants={fadeInUp}>
-                    <label className="block text-gray-700 mb-3 font-bold text-sm uppercase tracking-wider">Full Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Enter your full name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-lg"
+                {/* Animated Background Elements */}
+                <motion.div 
+                  className="absolute inset-0 opacity-10"
+                  animate={{ 
+                    rotate: 360,
+                  }}
+                  transition={{ 
+                    duration: 30, 
+                    repeat: Infinity, 
+                    ease: "linear" 
+                  }}
+                  style={{
+                    backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(251, 146, 60, 0.4) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(251, 191, 36, 0.4) 0%, transparent 50%)',
+                  }}
+                />
+
+                <div className="absolute top-0 left-0 w-full h-full">
+                  {[...Array(5)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute rounded-full bg-orange-300/20 blur-2xl"
+                      style={{
+                        width: `${Math.random() * 100 + 50}px`,
+                        height: `${Math.random() * 100 + 50}px`,
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                      }}
+                      animate={{
+                        x: [0, Math.random() * 50 - 25, 0],
+                        y: [0, Math.random() * 50 - 25, 0],
+                        scale: [1, 1.2, 1],
+                      }}
+                      transition={{
+                        duration: Math.random() * 5 + 5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
                     />
-                  </motion.div>
-                  
-                  <motion.div variants={fadeInUp}>
-                    <label className="block text-gray-700 mb-3 font-bold text-sm uppercase tracking-wider">Email Address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="BMcoffee@gmail.com"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-lg"
-                    />
-                  </motion.div>
-                  
-                  <motion.div variants={fadeInUp}>
-                    <label className="block text-gray-700 mb-3 font-bold text-sm uppercase tracking-wider">Message</label>
-                    <textarea
-                      rows="6"
-                      name="message"
-                      placeholder="Tell us about your coffee needs, volume requirements, or any questions about our Ethiopian coffee..."
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 resize-none text-lg"
-                    ></textarea>
-                  </motion.div>
-                  
-                  <motion.button
-                    type="button"
-                    onClick={handleSubmit}
-                    className="group relative w-full bg-gradient-to-r from-[#5C2C0C] to-[#4E342E] text-white py-5 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-                    variants={fadeInUp}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                  ))}
+                </div>
+
+                <div className="relative z-10">
+                  <motion.h2 
+                    className="text-3xl md:text-4xl font-bold text-orange-300 mb-2"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span className="relative z-10 flex items-center justify-center">
-                      {isSubmitted ? (
-                        <>
-                          <CheckCircle className="w-6 h-6 mr-3" />
-                          Message Sent Successfully!
-                        </>
-                      ) : (
-                        <>
-                          <Send className="w-6 h-6 mr-3" />
-                          Send Message
-                        </>
-                      )}
-                    </span>
-                  </motion.button>
-                </motion.div>
+                    Send us a Message
+                  </motion.h2>
+                  
+                  <motion.p 
+                    className="text-amber-100 mb-8 text-sm"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    We'll respond within 24 hours.
+                  </motion.p>
+                  
+                  <div className="space-y-5">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <label className="block text-amber-200 mb-2 font-semibold text-sm">Full Name</label>
+                      <motion.input
+                        type="text"
+                        name="name"
+                        placeholder="Your name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-amber-200/50 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
+                        whileFocus={{ scale: 1.02 }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    </motion.div>
+                    
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      <label className="block text-amber-200 mb-2 font-semibold text-sm">Email Address</label>
+                      <motion.input
+                        type="email"
+                        name="email"
+                        placeholder="your@email.com"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-amber-200/50 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
+                        whileFocus={{ scale: 1.02 }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    </motion.div>
+                    
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.6 }}
+                    >
+                      <label className="block text-amber-200 mb-2 font-semibold text-sm">Message</label>
+                      <motion.textarea
+                        rows="4"
+                        name="message"
+                        placeholder="Tell us about your coffee needs..."
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-amber-200/50 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all resize-none"
+                        whileFocus={{ scale: 1.02 }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    </motion.div>
+                    
+                    <motion.button
+                      type="button"
+                      onClick={handleSubmit}
+                      className="relative w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white py-4 rounded-xl font-bold shadow-xl overflow-hidden group"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.7 }}
+                      whileHover={{ scale: 1.03, boxShadow: "0 25px 35px -5px rgba(251, 146, 60, 0.6)" }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      <motion.div 
+                        className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600"
+                        initial={{ x: '-100%' }}
+                        whileHover={{ x: 0 }}
+                        transition={{ duration: 0.4 }}
+                      />
+                      <motion.span 
+                        className="relative z-10 flex items-center justify-center"
+                        animate={isSubmitted ? { scale: [1, 1.1, 1] } : {}}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {isSubmitted ? (
+                          <>
+                            <CheckCircle className="w-5 h-5 mr-2" />
+                            Message Sent!
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-5 h-5 mr-2" />
+                            Send Message
+                          </>
+                        )}
+                      </motion.span>
+                    </motion.button>
+                  </div>
+                </div>
               </motion.div>
             </motion.div>
           </div>
