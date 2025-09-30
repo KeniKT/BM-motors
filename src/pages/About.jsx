@@ -198,55 +198,67 @@ function About() {
         </div>
       </section>
 
-      {/* ---------- Founders Section ---------- */}
-      <section className="py-24 bg-[#FAF6F0]">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <motion.h2
-            className="text-5xl font-extrabold mb-16 text-[#5C2C0C]"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            Meet Our Founders
-          </motion.h2>
+      {/* ---------- Our Founders ---------- */}
+<section className="py-24 bg-[#FAF6F0]">
+  <div className="max-w-7xl mx-auto px-6">
+    <motion.h2
+      className="text-5xl font-extrabold mb-16 text-[#5C2C0C] text-center"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+    >
+      Meet Our Founders
+    </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {[
-              {
-                name: "Abebe Mekonnen",
-                role: "Co-Founder & CEO",
-                img: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?w=400&h=400&fit=crop",
-                bio: "Abebe has spent over 20 years building bridges between Ethiopian farmers and the global coffee market. His leadership ensures BM Coffee remains true to its roots while innovating for the future.",
-              },
-              {
-                name: "Marta Bekele",
-                role: "Co-Founder & Head of Operations",
-                img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop",
-                bio: "Marta oversees sourcing and operations, guaranteeing each bean is harvested, roasted, and exported with the highest standards. She is passionate about empowering women farmers in Ethiopia.",
-              },
-            ].map((founder, i) => (
-              <motion.div
-                key={i}
-                className="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transition"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: i * 0.3 }}
-              >
-                <img
-                  src={founder.img}
-                  alt={founder.name}
-                  className="w-40 h-40 rounded-full mx-auto mb-6 object-cover shadow-lg"
-                />
-                <h3 className="text-2xl font-bold text-[#5C2C0C]">
-                  {founder.name}
-                </h3>
-                <p className="italic text-orange-600 mb-4">{founder.role}</p>
-                <p className="text-gray-700">{founder.bio}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {[
+        {
+          name: "Abebe Mekonnen",
+          role: "Co-Founder & CEO",
+          img: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?w=400&h=400&fit=crop",
+          bio: "Abebe has spent over 20 years building bridges between Ethiopian farmers and the global coffee market.",
+        },
+        {
+          name: "Marta Bekele",
+          role: "Co-Founder & COO",
+          img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop",
+          bio: "Marta oversees sourcing and operations, guaranteeing each bean meets the highest standards.",
+        },
+        {
+          name: "Daniel Tadesse",
+          role: "Head of Quality",
+          img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+          bio: "Daniel ensures every batch passes rigorous quality control with his expertise in coffee grading.",
+        },
+        {
+          name: "Sara Alemayehu",
+          role: "Export Manager",
+          img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop",
+          bio: "Sara manages global partnerships and logistics, connecting our coffee with markets worldwide.",
+        },
+      ].map((founder, i) => (
+        <motion.div
+          key={i}
+          className="bg-white rounded-3xl shadow-lg p-6 hover:shadow-2xl transition"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: i * 0.15 }}
+        >
+          <img
+            src={founder.img}
+            alt={founder.name}
+            className="w-full aspect-square rounded-2xl mx-auto mb-4 object-cover shadow-lg"
+          />
+          <h3 className="text-xl font-bold text-[#5C2C0C] text-center">
+            {founder.name}
+          </h3>
+          <p className="italic text-orange-600 mb-3 text-center text-sm">{founder.role}</p>
+          <p className="text-gray-700 text-sm text-center">{founder.bio}</p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
     </div>
   );
 }
