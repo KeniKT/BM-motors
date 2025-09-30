@@ -1,21 +1,32 @@
-// src/App.jsx
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Sourcing from "./pages/Source";
-import Navbar from "./components/Navbar";
+import Source from "./pages/Source";
 import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/source" element={<Sourcing />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <div className="App bg-gray-50 min-h-screen flex flex-col">
+        {/* Navbar */}
+        <Navbar />
+
+        {/* Page Content */}
+        <main className="flex-grow pt-20">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/source" element={<Source />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+
+        {/* Footer */}
+        <Footer />
+      </div>
     </Router>
   );
 }
