@@ -6,10 +6,12 @@ import About from "./pages/About";
 import Source from "./pages/Source";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop"; // Import the new component
 
 function App() {
   return (
     <Router>
+      <ScrollToTop /> {/* Add ScrollToTop component here */}
       <div className="App bg-gray-50 min-h-screen flex flex-col">
         {/* Navbar */}
         <Navbar />
@@ -32,3 +34,4 @@ function App() {
 }
 
 export default App;
+
