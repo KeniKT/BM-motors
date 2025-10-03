@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { FlaskRound, Coffee, Droplets, Sun } from "lucide-react";
+import { FlaskRound, Coffee, Droplets, Sun, MapPin, Award, Mountain, Thermometer, Sparkles } from "lucide-react";
 
 // --- IMAGE ASSET ---
 import coffeeCherriesImage from "../assets/coffee-cherries_1.png";
@@ -47,36 +47,35 @@ const scaleIn = {
 // --- DATA STRUCTURE ---
 const processingSteps = [
   {
-    number: "01.",
+    number: "01",
     title: "Harvesting",
     icon: Coffee,
-    description: [
-      "The journey of our exceptional coffee begins in the verdant highlands of Ethiopia, where coffee trees are laden with deep-red, ripe cherries. Our partner farmers, equipped with generations of ancestral knowledge, meticulously handpick each cherry at its absolute peak of ripeness. This highly selective process, known as selective harvesting, is the cornerstone of quality, ensuring that only the beans with the fullest flavor potential are chosen.",
-      "Unlike mass-market methods, this labor-intensive approach guarantees that under-ripe or over-ripe cherries are left behind. This initial act of precision prevents undesirable flavors from entering the supply chain and sets a high standard from the very start. It is a testament to a deep respect for the coffee plant and a commitment to an extraordinary final product.",
-      "This careful selection is more than just a step in a process; it's a promise. A promise that every bean has been individually assessed and deemed worthy of the complex journey ahead. It is this foundational dedication that allows the unique, nuanced flavors of Ethiopian heirloom varieties to truly shine in every cup.",
-    ],
+    description: "Selective handpicking of ripe cherries at peak maturity ensures optimal flavor development and quality consistency.",
+    details: "Our partner farmers use traditional methods passed down through generations, carefully selecting only the deepest red cherries.",
     image: coffeeCherriesImage,
   },
   {
-    number: "02.",
+    number: "02",
     title: "Washing",
     icon: Droplets,
-    description: [
-      "Immediately after harvesting, the fresh cherries are transported to local washing stations. Here, they are submerged in clean water to begin the 'wet processing' method. This technique involves using a de-pulping machine to gently remove the outer skin and most of the fruity mucilage from the coffee bean, a critical step for producing coffees known for their clarity and bright acidity.",
-      "Once de-pulped, the beans are guided through long channels of flowing water. This not only cleanses them further but also acts as a natural method of quality control. Denser, higher-quality beans sink to the bottom, while any lighter, defective beans float to the surface and are skillfully skimmed away. This gravity-based sorting ensures that only the most robust beans proceed to the next stage.",
-      "The final part of the washing process involves a period of fermentation in clean water tanks for 12 to 48 hours. This controlled fermentation breaks down any remaining mucilage, polishing the bean and enhancing its aromatic complexity. The result is a pristine green coffee bean, free of impurities and primed to develop a clean, crisp, and vibrant flavor profile.",
-    ],
+    description: "Wet processing method removes fruit pulp and ferments beans to develop clean, bright flavor profiles.",
+    details: "The washing process includes de-pulping, fermentation, and multiple rinses to achieve the signature Ethiopian clarity.",
     image: coffeeCherriesImage,
   },
   {
-    number: "03.",
+    number: "03",
     title: "Drying",
     icon: Sun,
-    description: [
-      "After fermentation, the washed beans are carefully laid out on raised African drying beds. These beds, which look like large mesh tables, are essential for promoting even airflow around each bean. This method prevents the risk of mold or off-flavors developing, which can occur when beans are dried directly on the ground. The beans are spread in a thin layer to maximize their exposure to the sun and breeze.",
-      "For the next one to two weeks, the beans embark on a slow and gentle sun-drying journey. During this time, farmers and station workers meticulously rake and turn the beans by hand every few hours. This constant motion is crucial for ensuring that all beans dry at a uniform rate, reducing their moisture content from around 45% down to the stable target of 11%.",
-      "This patient, natural drying process is vital for locking in the coffee's inherent sweetness and complex flavors. Rushing this stage with mechanical dryers can compromise the bean's cellular structure and diminish its quality. By honoring this traditional, sun-powered method, we ensure the coffee retains its full aromatic potential and develops a rich, well-rounded character.",
-    ],
+    description: "Sun-drying on raised beds allows natural moisture reduction while preserving essential oils and aromatics.",
+    details: "Beans are carefully turned every few hours for 1-2 weeks until reaching the optimal 11% moisture content.",
+    image: coffeeCherriesImage,
+  },
+  {
+    number: "04",
+    title: "Quality Control",
+    icon: FlaskRound,
+    description: "Rigorous testing and grading ensures only premium beans meet our exacting standards for export.",
+    details: "Each batch undergoes cupping, defect analysis, and moisture testing before receiving our quality certification.",
     image: coffeeCherriesImage,
   },
 ];
@@ -84,19 +83,39 @@ const processingSteps = [
 const originRegions = [
   {
     name: "Sidamo",
+    location: "Southern Ethiopia",
+    altitude: "1,400 - 2,200m",
+    temperature: "15°C - 25°C",
+    uniqueFeatures: [
+      "Volcanic soil rich in minerals",
+      "Ancient heirloom coffee varieties",
+      "Shade-grown under native trees",
+      "Family-owned micro-farms"
+    ],
+    flavorProfile: "Bright citrus acidity with floral notes, medium body with wine-like complexity",
     description: [
-      "Often referred to as 'the garden of coffee,' Sidamo is a vast and fertile region in southern Ethiopia, blessed with high altitudes, ample rainfall, and rich, volcanic soil. This unique combination of environmental factors, known as terroir, creates a perfect microclimate for producing some of the world's most diverse and nuanced coffees. The region is a mosaic of small, family-owned farms where coffee is grown organically under the shade of native trees.",
-      "The flavor profile of Sidamo coffee is famously complex and elegant. Connoisseurs celebrate these beans for their bright, crisp acidity and a delicate, often tea-like body. The aroma is intensely floral, with common tasting notes including lemon, lime, bergamot, and a medley of sweet stone fruits like peach and apricot. This bright, citrusy character makes Sidamo a benchmark for high-quality washed Ethiopian coffees.",
-      "Growing coffee in Sidamo is more than agriculture; it's a cultural heritage. The methods used have been passed down through countless generations, and the coffee trees themselves are often ancient, heirloom varieties that are unique to the region. By sourcing from Sidamo, we not only acquire exceptional coffee but also support a sustainable ecosystem and a proud, long-standing tradition of coffee cultivation.",
+      "Often referred to as 'the garden of coffee,' Sidamo is a vast and fertile region in southern Ethiopia, blessed with high altitudes, ample rainfall, and rich, volcanic soil. This unique combination of environmental factors creates a perfect microclimate for producing some of the world's most diverse and nuanced coffees.",
+      "The region is home to ancient heirloom varieties that have evolved naturally over centuries, creating unique flavor profiles that cannot be replicated elsewhere. These indigenous cultivars, combined with traditional farming methods, produce beans with exceptional complexity and character.",
+      "Sidamo's coffee culture runs deep, with cultivation methods passed down through generations. The sustainable practices employed by local farmers not only preserve the environment but also maintain the authentic flavors that make Sidamo coffee truly distinctive."
     ],
     image: coffeeCherriesImage,
   },
   {
     name: "Yirgacheffe",
+    location: "Gedeo Zone, SNNPR",
+    altitude: "1,700 - 2,100m",
+    temperature: "18°C - 22°C",
+    uniqueFeatures: [
+      "Birthplace of coffee legend",
+      "Intense floral aromatics",
+      "Washed processing perfection",
+      "UNESCO heritage recognition"
+    ],
+    flavorProfile: "Intensely floral with jasmine and bergamot, tea-like body with exceptional clarity",
     description: [
-      "Nestled within the larger Sidamo region lies Yirgacheffe, a small but legendary micro-region with a reputation that looms large in the world of specialty coffee. Often considered the very birthplace of coffee, its high elevations and ideal climate conditions produce beans that are exceptionally dense and packed with flavor. Yirgacheffe is not just a place; it's a standard of excellence.",
-      "What sets Yirgacheffe coffee apart is its unmistakable and powerful aromatic profile. It is renowned for an intensely floral bouquet, with fragrant notes of jasmine, honeysuckle, and orange blossom that are immediately recognizable. This is complemented by a vibrant, clean acidity and a silky, almost weightless mouthfeel. The result is a coffee experience that is both exhilarating and profoundly elegant.",
-      "The meticulous processing in Yirgacheffe is key to its world-class status. The region perfected the washed processing method, which allows the coffee's intrinsic, delicate flavors to shine without interference from the fruit. For coffee lovers seeking the pinnacle of aromatic complexity and clean, bright flavors, Yirgacheffe remains an undisputed and essential touchstone.",
+      "Nestled within the larger Sidamo region lies Yirgacheffe, a small but legendary micro-region with a reputation that looms large in the world of specialty coffee. Often considered the very birthplace of coffee, its high elevations and ideal climate conditions produce beans that are exceptionally dense and packed with flavor.",
+      "What sets Yirgacheffe apart is its unmistakable aromatic profile. The region is renowned for producing coffees with intense floral bouquets, featuring notes of jasmine, honeysuckle, and orange blossom. This is complemented by a vibrant, clean acidity and a silky, almost weightless mouthfeel.",
+      "The meticulous washed processing method perfected in Yirgacheffe allows the coffee's intrinsic, delicate flavors to shine without interference. For coffee enthusiasts seeking the pinnacle of aromatic complexity and clean, bright flavors, Yirgacheffe remains an undisputed benchmark of excellence."
     ],
     image: coffeeCherriesImage,
   },
@@ -168,416 +187,367 @@ function Source() {
       </motion.section>
 
       {/* ---------- The Origins ---------- */}
-      <section className="py-20 bg-gradient-to-r from-[#FAF6F0] to-[#F5F1EB]">
+      <section className="py-20 bg-gradient-to-br from-[#FAF6F0] via-[#F8F4EE] to-[#F5F1EB] relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-orange-400 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-amber-400 rounded-full blur-3xl" />
+        </div>
+
         <motion.div 
-          className="w-full text-center mb-16"
+          className="relative z-10 w-full text-center mb-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
         >
-          <h2 className="text-5xl md:text-6xl font-extrabold text-[#5C2C0C] mb-4">
-            The Origins
-          </h2>
+          <motion.div className="flex items-center justify-center mb-6" variants={fadeInUp}>
+            <Sparkles className="w-8 h-8 text-orange-500 mr-3" />
+            <h2 className="text-5xl md:text-6xl font-extrabold text-[#5C2C0C]">
+              The Origins
+            </h2>
+            <Sparkles className="w-8 h-8 text-orange-500 ml-3" />
+          </motion.div>
+          
           <motion.div 
-            className="w-24 h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent mx-auto mb-8"
+            className="w-32 h-1 bg-gradient-to-r from-orange-400 via-amber-500 to-orange-400 mx-auto mb-8 rounded-full"
             initial={{ width: 0 }}
-            whileInView={{ width: 96 }}
+            whileInView={{ width: 128 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 1, delay: 0.3 }}
           />
           
-          {/* SIMPLIFIED PROFESSIONAL INTRO */}
+          {/* Enhanced Introduction */}
           <motion.div 
-            className="max-w-5xl mx-auto px-8 md:px-16 mb-20"
+            className="max-w-6xl mx-auto px-8 md:px-16 mb-24"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={staggerContainer}
           >
             <motion.div 
-              className="bg-white rounded-2xl shadow-lg p-8 md:p-12 border-l-4 border-orange-500"
+              className="relative bg-gradient-to-r from-white via-orange-50/50 to-white rounded-3xl shadow-xl p-10 md:p-16 border border-orange-200/30 backdrop-blur-sm"
               variants={fadeInUp}
             >
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-                Ethiopia is often celebrated as the <span className="font-semibold text-[#5C2C0C]">birthplace of coffee</span>, and its landscapes carry centuries of tradition in every harvest. The country's diverse climates and high-altitude regions provide ideal conditions for cultivating beans with extraordinary complexity.
-              </p>
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-                Each region tells a different story through its flavors — from <span className="italic text-orange-600">bright citrus to deep floral notes</span>. These coffees are not just agricultural products but living expressions of culture, history, and community.
-              </p>
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                To explore Ethiopian coffee is to embark on a <span className="font-semibold text-[#5C2C0C]">journey through its land, people, and timeless heritage</span>.
-              </p>
+              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-orange-400 to-amber-500 rounded-full flex items-center justify-center shadow-lg">
+                <Coffee className="w-6 h-6 text-white" />
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-8 text-center mb-8">
+                <motion.div variants={fadeInUp} className="space-y-2">
+                  <div className="text-3xl font-bold text-orange-500">2</div>
+                  <div className="text-sm text-gray-600 font-medium">Premium Regions</div>
+                </motion.div>
+                <motion.div variants={fadeInUp} className="space-y-2">
+                  <div className="text-3xl font-bold text-orange-500">1000+</div>
+                  <div className="text-sm text-gray-600 font-medium">Years of Tradition</div>
+                </motion.div>
+                <motion.div variants={fadeInUp} className="space-y-2">
+                  <div className="text-3xl font-bold text-orange-500">100%</div>
+                  <div className="text-sm text-gray-600 font-medium">Heirloom Varieties</div>
+                </motion.div>
+              </div>
+
+              <motion.p 
+                className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6 text-center"
+                variants={fadeInUp}
+              >
+                Ethiopia is often celebrated as the <span className="font-semibold text-[#5C2C0C] bg-orange-100 px-2 py-1 rounded">birthplace of coffee</span>, and its landscapes carry centuries of tradition in every harvest. The country's diverse climates and high-altitude regions provide ideal conditions for cultivating beans with extraordinary complexity.
+              </motion.p>
+              <motion.p 
+                className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6 text-center"
+                variants={fadeInUp}
+              >
+                Each region tells a different story through its flavors — from <span className="italic text-orange-600 font-medium">bright citrus to deep floral notes</span>. These coffees are not just agricultural products but living expressions of culture, history, and community.
+              </motion.p>
+              <motion.p 
+                className="text-lg md:text-xl text-gray-700 leading-relaxed text-center"
+                variants={fadeInUp}
+              >
+                To explore Ethiopian coffee is to embark on a <span className="font-semibold text-[#5C2C0C] bg-gradient-to-r from-orange-100 to-amber-100 px-2 py-1 rounded">journey through its land, people, and timeless heritage</span>.
+              </motion.p>
             </motion.div>
           </motion.div>
         </motion.div>
 
-        <div className="bg-gradient-to-r from-[#FAF6F0] to-[#F5F1EB]">
+        {/* Region Cards */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
           {originRegions.map((region, index) => (
-            <section
+            <motion.div
               key={index}
-              className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-24 py-20 px-6"
+              className="mb-24 last:mb-0"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={staggerContainer}
             >
-              <motion.div
-                className={`w-full aspect-square rounded-3xl overflow-hidden shadow-2xl relative group ${
-                  index % 2 === 0 ? "md:order-2" : "md:order-1"
-                }`}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.5 }}
-                variants={imageReveal}
-              >
-                <motion.img
-                  src={region.image}
-                  alt={region.name}
-                  className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#5C2C0C]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <motion.div 
-                  className="absolute -top-4 -right-4 w-32 h-32 bg-gradient-to-br from-orange-400 to-amber-500 rounded-full blur-2xl opacity-0 group-hover:opacity-40"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.3 }}
-                />
-              </motion.div>
-              
-              <motion.div
-                className={`flex flex-col justify-center ${
-                  index % 2 === 0 ? "md:order-1" : "md:order-2"
-                }`}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.5 }}
-                variants={staggerContainer}
-              >
-                <motion.h3
-                  className="text-4xl md:text-5xl font-extrabold text-[#5C2C0C] mb-8"
-                  variants={index % 2 === 0 ? fadeInRight : fadeInLeft}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                {/* Image Section */}
+                <motion.div
+                  className={`relative ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}
+                  variants={imageReveal}
                 >
-                  {region.name}
-                </motion.h3>
-                
-                <div className="space-y-6">
-                  {region.description.map((paragraph, pIndex) => (
-                    <motion.div
-                      key={pIndex}
-                      className="relative pl-6 border-l-4 border-orange-400/30"
-                      variants={fadeInUp}
-                    >
-                      <p className="text-gray-700 leading-relaxed text-lg">
+                  <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl group mb-6">
+                    <motion.img
+                      src={region.image}
+                      alt={region.name}
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    
+                    {/* Region Name Overlay */}
+                    <div className="absolute bottom-6 left-6 text-white">
+                      <h3 className="text-3xl font-bold mb-2">{region.name}</h3>
+                      <div className="flex items-center text-amber-200">
+                        <MapPin className="w-4 h-4 mr-2" />
+                        <span className="text-sm">{region.location}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Paragraph under image */}
+                  <motion.div 
+                    className="bg-white rounded-2xl p-6 shadow-lg border-l-4 border-orange-400"
+                    variants={fadeInUp}
+                  >
+                    <p className="text-gray-700 leading-relaxed italic">
+                      {region.description[region.description.length - 1]}
+                    </p>
+                  </motion.div>
+                </motion.div>
+
+                {/* Content Section */}
+                <motion.div
+                  className={`${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
+                  variants={staggerContainer}
+                >
+                  <motion.h3
+                    className="text-4xl md:text-5xl font-extrabold text-[#5C2C0C] mb-6"
+                    variants={fadeInUp}
+                  >
+                    {region.name}
+                  </motion.h3>
+
+                  {/* Key Stats */}
+                  <motion.div 
+                    className="grid grid-cols-2 gap-4 mb-8"
+                    variants={fadeInUp}
+                  >
+                    <div className="bg-white rounded-xl p-4 shadow-md border-l-4 border-orange-400">
+                      <div className="flex items-center mb-2">
+                        <Mountain className="w-5 h-5 text-orange-500 mr-2" />
+                        <span className="text-sm font-semibold text-gray-600">Altitude</span>
+                      </div>
+                      <p className="text-lg font-bold text-[#5C2C0C]">{region.altitude}</p>
+                    </div>
+                    <div className="bg-white rounded-xl p-4 shadow-md border-l-4 border-blue-400">
+                      <div className="flex items-center mb-2">
+                        <Thermometer className="w-5 h-5 text-blue-500 mr-2" />
+                        <span className="text-sm font-semibold text-gray-600">Temperature</span>
+                      </div>
+                      <p className="text-lg font-bold text-[#5C2C0C]">{region.temperature}</p>
+                    </div>
+                  </motion.div>
+
+                  {/* Flavor Profile */}
+                  <motion.div 
+                    className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-6 mb-8 border border-orange-200"
+                    variants={fadeInUp}
+                  >
+                    <div className="flex items-center mb-3">
+                      <Coffee className="w-5 h-5 text-orange-500 mr-2" />
+                      <span className="font-semibold text-[#5C2C0C]">Flavor Profile</span>
+                    </div>
+                    <p className="text-gray-700 italic">{region.flavorProfile}</p>
+                  </motion.div>
+
+                  {/* Unique Features */}
+                  <motion.div 
+                    className="mb-8"
+                    variants={fadeInUp}
+                  >
+                    <h4 className="font-semibold text-[#5C2C0C] mb-4 flex items-center">
+                      <Award className="w-5 h-5 text-orange-500 mr-2" />
+                      What Makes It Special
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {region.uniqueFeatures.map((feature, fIndex) => (
+                        <motion.div
+                          key={fIndex}
+                          className="flex items-center bg-white rounded-lg p-3 shadow-sm border border-gray-100"
+                          variants={fadeInUp}
+                          whileHover={{ scale: 1.02 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <div className="w-2 h-2 bg-orange-400 rounded-full mr-3 flex-shrink-0" />
+                          <span className="text-sm text-gray-700">{feature}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+
+                  {/* Description (first two paragraphs) */}
+                  <motion.div 
+                    className="space-y-4"
+                    variants={staggerContainer}
+                  >
+                    {region.description.slice(0, -1).map((paragraph, pIndex) => (
+                      <motion.p
+                        key={pIndex}
+                        className="text-gray-700 leading-relaxed"
+                        variants={fadeInUp}
+                      >
                         {paragraph}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </section>
+                      </motion.p>
+                    ))}
+                  </motion.div>
+                </motion.div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* ---------- The Process ---------- */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
+        {/* Simple Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 20% 80%, #f97316 1px, transparent 1px),
+                             radial-gradient(circle at 80% 20%, #f59e0b 1px, transparent 1px),
+                             radial-gradient(circle at 40% 40%, #f97316 1px, transparent 1px)`,
+            backgroundSize: '60px 60px'
+          }} />
+        </div>
+
         <motion.div 
-          className="w-full text-center mb-16"
+          className="relative z-10 w-full text-center mb-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
         >
-          <h2 className="text-5xl md:text-6xl font-extrabold text-orange-500 mb-4">
-            The Process
-          </h2>
-          <motion.div 
-            className="w-24 h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent mx-auto mb-8"
-            initial={{ width: 0 }}
-            whileInView={{ width: 96 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          />
+          <motion.div className="flex items-center justify-center mb-6" variants={fadeInUp}>
+            <Coffee className="w-8 h-8 text-orange-500 mr-3" />
+            <h2 className="text-5xl md:text-6xl font-extrabold text-gray-800">
+              The Process
+            </h2>
+            <Coffee className="w-8 h-8 text-orange-500 ml-3" />
+          </motion.div>
           
-          {/* SIMPLIFIED PROFESSIONAL INTRO */}
           <motion.div 
-            className="max-w-5xl mx-auto px-8 md:px-16 mb-20"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={staggerContainer}
+            className="w-32 h-1 bg-gradient-to-r from-orange-400 via-amber-500 to-orange-400 mx-auto mb-8 rounded-full"
+            initial={{ width: 0 }}
+            whileInView={{ width: 128 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.3 }}
+          />
+
+          {/* Enhanced Process Introduction */}
+          <motion.div 
+            className="max-w-4xl mx-auto px-6 mb-16"
+            variants={fadeInUp}
           >
-            <motion.div 
-              className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl shadow-lg p-8 md:p-12 border-l-4 border-orange-500"
-              variants={fadeInUp}
-            >
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-                Every exceptional cup of coffee begins long before it reaches your mug, in the <span className="font-semibold text-orange-600">careful hands of farmers</span> who tend each tree with dedication. From the moment cherries are harvested at peak ripeness, they embark on a journey of precision: <span className="italic text-orange-600">washing, fermenting, drying, and milling</span> — each step meticulously designed to preserve flavor and quality.
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+              <div className="flex items-center justify-center mb-6">
+                <div className="bg-gradient-to-r from-orange-400 to-amber-500 rounded-full p-3">
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+              </div>
+              <p className="text-xl text-gray-700 leading-relaxed text-center mb-4">
+                From cherry to cup, every step is carefully orchestrated to preserve the unique character of Ethiopian coffee
               </p>
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-                This process transforms vibrant cherries into green coffee beans that capture the essence of their origin. By honoring <span className="font-semibold text-[#5C2C0C]">traditional methods</span> and combining them with modern quality standards, every stage ensures the beans' full potential is unlocked.
+              <p className="text-lg text-gray-600 text-center">
+                Our 4-step process ensures <span className="font-semibold text-orange-600">exceptional quality</span> and <span className="font-semibold text-orange-600">authentic flavors</span> in every batch
               </p>
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                The result is a <span className="font-semibold text-orange-600">consistent, high-quality coffee</span> that carries the story of its journey from farm to cup.
-              </p>
-            </motion.div>
+            </div>
           </motion.div>
         </motion.div>
 
-        <div className="bg-white">
-          {processingSteps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <section
-                key={index}
-                className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-24 py-20 px-6"
-              >
-                <motion.div
-                  className={`w-full aspect-square rounded-3xl overflow-hidden shadow-2xl relative group ${
-                    index % 2 === 0 ? "md:order-1" : "md:order-2"
-                  }`}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.5 }}
-                  variants={imageReveal}
-                >
-                  <motion.img
-                    src={step.image}
-                    alt={step.title}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-orange-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  <motion.div 
-                    className="absolute top-6 right-6 bg-white rounded-2xl shadow-2xl p-4 flex flex-col items-center gap-2"
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3, type: "spring" }}
-                  >
-                    <span className="text-3xl font-extrabold text-orange-600">{step.number.replace('.', '')}</span>
-                    <Icon className="w-6 h-6 text-orange-500" />
-                  </motion.div>
-
-                  <motion.div 
-                    className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-orange-400 to-amber-500 rounded-full blur-2xl opacity-0 group-hover:opacity-40"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                  />
-                </motion.div>
-                
-                <motion.div
-                  className={`flex flex-col justify-center ${
-                    index % 2 === 0 ? "md:order-2" : "md:order-1"
-                  }`}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.5 }}
-                  variants={staggerContainer}
-                >
-                  <motion.div 
-                    className="flex items-center gap-4 mb-8"
-                    variants={index % 2 === 0 ? fadeInLeft : fadeInRight}
-                  >
-                    <motion.div
-                      className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg"
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <Icon className="w-8 h-8 text-white" />
-                    </motion.div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-orange-500">
-                      {step.title}
-                    </h2>
-                  </motion.div>
-                  
-                  <div className="space-y-6">
-                    {step.description.map((paragraph, pIndex) => (
-                      <motion.div
-                        key={pIndex}
-                        className="relative pl-6 border-l-4 border-orange-400/30"
-                        variants={fadeInUp}
-                      >
-                        <p className="text-gray-700 leading-relaxed text-lg">
-                          {paragraph}
-                        </p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              </section>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ---------- Lab & Quality Testing ---------- */}
-      <section className="py-24 relative overflow-hidden bg-white">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#3E2723] via-[#4E342E] to-[#5C2C0C]" />
-        
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-amber-300/10 blur-2xl"
-              style={{
-                width: `${Math.random() * 200 + 100}px`,
-                height: `${Math.random() * 200 + 100}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, Math.random() * 80 - 40, 0],
-                x: [0, Math.random() * 80 - 40, 0],
-                opacity: [0.1, 0.3, 0.1],
-                scale: [1, 1.3, 1],
-              }}
-              transition={{ 
-                duration: Math.random() * 12 + 8, 
-                repeat: Infinity,
-                ease: "easeInOut" 
-              }}
-            />
-          ))}
-        </div>
-
-        <motion.div
-          className="relative z-10 max-w-7xl mx-auto px-6 text-white"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={staggerContainer}
-        >
-          <motion.div className="text-center mb-20" variants={fadeInUp}>
-            <motion.div
-              className="inline-block p-6 bg-white/10 backdrop-blur-md rounded-3xl border-2 border-amber-300/30 mb-8 shadow-2xl"
-              whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-              transition={{ duration: 0.5 }}
-              variants={scaleIn}
-            >
-              <FlaskRound className="w-16 h-16 text-amber-300" />
-            </motion.div>
-
-            <motion.h2
-              className="text-5xl md:text-6xl font-extrabold mb-8 text-orange-300"
-              variants={fadeInUp}
-            >
-              Final Quality Control
-            </motion.h2>
-            
-            <motion.div 
-              className="w-24 h-1 bg-gradient-to-r from-transparent via-orange-300 to-transparent mx-auto mb-8"
-              initial={{ width: 0 }}
-              whileInView={{ width: 96 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            />
-            
-            <motion.p
-              className="text-xl leading-relaxed max-w-4xl mx-auto text-amber-100"
-              variants={fadeInUp}
-            >
-              Our state-of-the-art quality control laboratory employs rigorous testing protocols and certified experts to ensure every batch meets our exceptional standards. Through comprehensive cupping analysis, moisture testing, and sensory evaluation, we guarantee that only the finest coffee reaches your cup.
-            </motion.p>
-          </motion.div>
-
-          <motion.div 
+        {/* Simplified Process Steps */}
+        <div className="relative z-10 max-w-6xl mx-auto px-6">
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
           >
-            {[
-              {
-                title: "Cupping Laboratory",
-                icon: FlaskRound,
-                step: "Step 1",
-                description: "Our certified Q-graders conduct systematic cupping sessions to evaluate aroma, flavor, acidity, body, and aftertaste. Each sample is scored using standardized protocols to ensure consistency and quality across all batches."
-              },
-              {
-                title: "Moisture Analysis",
-                icon: Droplets,
-                step: "Step 2",
-                description: "Advanced moisture meters ensure optimal bean moisture content between 10-12%. This critical measurement prevents mold growth, preserves flavor compounds, and guarantees proper storage stability throughout the supply chain."
-              },
-              {
-                title: "Defect Screening",
-                icon: Coffee,
-                step: "Step 3",
-                description: "Meticulous visual inspection removes broken beans, foreign matter, and discolored samples. Our trained specialists identify primary and secondary defects, ensuring only premium-grade beans advance to final packaging stages."
-              },
-              {
-                title: "Final Certification",
-                icon: Sun,
-                step: "Step 4",
-                description: "Each approved batch receives comprehensive documentation including origin certificates, quality scores, and traceability records. This final step ensures complete transparency and maintains our commitment to excellence."
-              }
-            ].map((item, index) => {
-              const Icon = item.icon;
-              const colors = ["amber", "cyan", "emerald", "violet"];
-              const color = colors[index];
-              
+            {processingSteps.map((step, index) => {
+              const Icon = step.icon;
               return (
                 <motion.div
                   key={index}
-                  className="group relative"
+                  className="relative group"
                   variants={fadeInUp}
-                  whileHover={{ y: -10 }}
+                  whileHover={{ y: -5 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl mb-6">
-                    <div className={`w-full h-full bg-gradient-to-br from-${color}-200 to-${color}-300 flex items-center justify-center`}>
-                      <Icon className="w-16 h-16 text-white/80" />
+                  {/* Simple Card Design */}
+                  <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 group-hover:shadow-xl transition-all duration-300 h-full">
+                    {/* Step Number */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-amber-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">
+                        {step.number}
+                      </div>
+                      <div className="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center group-hover:bg-orange-100 transition-colors duration-300">
+                        <Icon className="w-6 h-6 text-orange-500" />
+                      </div>
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    {/* Content */}
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                      {step.description}
+                    </p>
                     
-                    <motion.div
-                      className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg"
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2 * (index + 1) }}
-                    >
-                      <span className={`text-sm font-bold text-${color}-600`}>{item.step}</span>
-                    </motion.div>
+                    {/* Details */}
+                    <div className="bg-gray-50 rounded-lg p-3 border-l-4 border-orange-400">
+                      <p className="text-xs text-gray-600 leading-relaxed">
+                        {step.details}
+                      </p>
+                    </div>
                   </div>
-                  
-                  <motion.h3 
-                    className="text-xl font-bold text-amber-200 mb-3"
-                    variants={fadeInUp}
-                  >
-                    {item.title}
-                  </motion.h3>
-                  <motion.p 
-                    className="text-amber-100/80 text-sm leading-relaxed"
-                    variants={fadeInUp}
-                  >
-                    {item.description}
-                  </motion.p>
+
+                  {/* Simple Arrow Connector */}
+                  {index < processingSteps.length - 1 && (
+                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-8 transform -translate-y-1/2 z-10">
+                      <div className="w-0 h-0 border-l-6 border-l-orange-400 border-t-3 border-t-transparent border-b-3 border-b-transparent" />
+                    </div>
+                  )}
                 </motion.div>
               );
             })}
           </motion.div>
 
+          {/* Quality Assurance Summary */}
           <motion.div 
-            className="mt-20 text-center"
+            className="mt-16 text-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
             variants={fadeInUp}
           >
             <motion.div
-              className="inline-block bg-white/5 backdrop-blur-md rounded-3xl border border-amber-300/20 px-8 py-6 shadow-2xl"
+              className="inline-block bg-white rounded-2xl border border-gray-200 px-8 py-6 shadow-lg"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              <p className="text-amber-100 text-lg font-medium">
-                <span className="text-orange-300 font-bold">100%</span> of our coffee beans undergo this rigorous 4-step quality control process, 
+              <div className="flex items-center justify-center mb-4">
+                <Award className="w-8 h-8 text-orange-500 mr-3" />
+                <span className="text-2xl font-bold text-gray-800">Quality Guarantee</span>
+              </div>
+              <p className="text-gray-700 text-lg font-medium max-w-2xl">
+                <span className="text-orange-500 font-bold">100%</span> of our coffee beans undergo this rigorous 4-step process, 
                 ensuring that every cup delivers the exceptional taste and aroma you expect from our premium Ethiopian coffee.
               </p>
             </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </section>
     </div>
   );
