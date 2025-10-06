@@ -121,4 +121,3 @@ const Footer = () => {
 };
 
 export default Footer;
-src/components/Footer.jsx
